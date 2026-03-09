@@ -6,5 +6,6 @@ router.use("/staff", require("./staff"));
 router.use("/leadStatus", require("./leadStatus"));
 router.use("/category", require("./category"));
 router.use("/lead", require("./lead"));
+router.use("/quotation", require("./quotation"));
 
 module.exports = router;

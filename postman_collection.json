@@ -616,6 +616,163 @@
           }
         }
       ]
+    },
+    {
+      "name": "Quotation",
+      "item": [
+        {
+          "name": "Create Quotation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"price\": 10000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"grandTotal\": \"11800\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quotation/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Quotations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quotation?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quotation By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quotation/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quotations By Lead ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quotation/lead/:leadId",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", "lead", ":leadId"],
+              "variable": [
+                {
+                  "key": "leadId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Quotation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 15000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"cgst_sgst\",\n  \"cgstPercentage\": 9,\n  \"sgstPercentage\": 9,\n  \"grandTotal\": \"17700\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quotation/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Quotation",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quotation/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
