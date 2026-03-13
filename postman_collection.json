@@ -498,7 +498,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerName\": \"Rahul Sharma\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"rahul@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Business Cards\",\n  \"qty\": 500,\n  \"leadStatus\": \"LEAD_STATUS_ID_HERE\"\n}"
+              "raw": "{\n  \"customerName\": \"Rahul Sharma\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"rahul@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Business Cards\",\n  \"qty\": 500,\n  \"leadStatus\": \"LEAD_STATUS_ID_HERE\",\n  \"price\": 5000,\n  \"remark\": \"Urgent order\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/lead/create",
@@ -621,7 +621,7 @@
       "name": "Quotation",
       "item": [
         {
-          "name": "Create Quotation",
+          "name": "Create Quotation (From Lead)",
           "request": {
             "method": "POST",
             "header": [
@@ -636,7 +636,32 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"price\": 10000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"grandTotal\": \"11800\"\n}"
+              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"price\": 10000,\n  \"subTotal\": 10000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"grandTotal\": \"11800\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quotation/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotation", "create"]
+            }
+          }
+        },
+        {
+          "name": "Create Quotation (Direct)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Amit Kumar\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"amit@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Brochures\",\n  \"qty\": 1000,\n  \"price\": 10000,\n  \"subTotal\": 10000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"cgst_sgst\",\n  \"cgstPercentage\": 9,\n  \"sgstPercentage\": 9,\n  \"grandTotal\": \"11800\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/quotation/create",
@@ -734,7 +759,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"price\": 15000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"cgst_sgst\",\n  \"cgstPercentage\": 9,\n  \"sgstPercentage\": 9,\n  \"grandTotal\": \"17700\"\n}"
+              "raw": "{\n  \"price\": 15000,\n  \"subTotal\": 15000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"cgst_sgst\",\n  \"cgstPercentage\": 9,\n  \"sgstPercentage\": 9,\n  \"grandTotal\": \"17700\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/quotation/:id",
