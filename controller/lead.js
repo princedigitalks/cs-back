@@ -2,7 +2,7 @@ const LEAD = require("../model/lead");
 
 exports.createLead = async (req, res) => {
   try {
-    const { customerName, mobileNumber, email, category, productName, qty, leadStatus } = req.body;
+    const { customerName, mobileNumber, email, category, productName, qty, leadStatus, price, remark } = req.body;
 
     const leadData = {
       customerName,
@@ -12,6 +12,8 @@ exports.createLead = async (req, res) => {
       productName,
       qty,
       leadStatus,
+      price,
+      remark,
     };
 
     const leadDetails = await LEAD.create(leadData);
