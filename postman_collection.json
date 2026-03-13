@@ -818,7 +818,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"quotation\": \"QUOTATION_ID_HERE\",\n  \"orderStatus\": \"Pending\"\n}"
+              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"quotation\": \"QUOTATION_ID_HERE\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/order/create",
@@ -916,7 +916,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"orderStatus\": \"Completed\"\n}"
+              "raw": "{\n  \"customerName\": \"Updated Name\",\n  \"qty\": 200\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/order/:id",
@@ -945,6 +945,163 @@
               "raw": "{{baseUrl}}/order/:id",
               "host": ["{{baseUrl}}"],
               "path": ["order", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Status",
+      "item": [
+        {
+          "name": "Create Order Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"ORDER_ID_HERE\",\n  \"status\": \"Processing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Order Statuses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Order Status By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Order Statuses By Order ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus/order/:orderId",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus", "order", ":orderId"],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Order Status",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orderStatus/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["orderStatus", ":id"],
               "variable": [
                 {
                   "key": "id",

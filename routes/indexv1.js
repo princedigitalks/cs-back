@@ -8,5 +8,6 @@ router.use("/category", require("./category"));
 router.use("/lead", require("./lead"));
 router.use("/quotation", require("./quotation"));
 router.use("/order", require("./order"));
+router.use("/orderStatus", require("./orderStatus"));
 
 module.exports = router;
