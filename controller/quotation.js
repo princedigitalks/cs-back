@@ -3,11 +3,43 @@ const LEAD = require("../model/lead");
 
 exports.createQuotation = async (req, res) => {
   try {
-    const { lead, price, taxType, gstType, igstPercentage, cgstPercentage, sgstPercentage, grandTotal } = req.body;
+    const { lead, customerName, mobileNumber, email, category, productName, qty, price, subTotal, taxType, gstType, igstPercentage, cgstPercentage, sgstPercentage, grandTotal } = req.body;
 
-    const leadExists = await LEAD.findById(lead);
-    if (!leadExists) {
-      throw new Error("Lead not found");
+    let quotationData = {};
+
+    // Agar lead ID hai to lead se data copy karo
+    if (lead) {
+      const leadExists = await LEAD.findById(lead);
+      if (!leadExists) {
+        throw new Error("Lead not found");
+      }
+      quotationData = {
+        lead: leadExists._id,
+        customerName: leadExists.customerName,
+        mobileNumber: leadExists.mobileNumber,
+        email: leadExists.email,
+        category: leadExists.category,
+        productName: productName || leadExists.productName,
+        qty: qty || leadExists.qty,
+      };
+      
+      // Validation for required fields from lead
+      if (!quotationData.productName || !quotationData.qty) {
+        throw new Error("productName and qty are required");
+      }
+    } else {
+      // Bina lead ke direct quotation
+      if (!customerName || !mobileNumber || !category || !productName || !qty) {
+        throw new Error("customerName, mobileNumber, category, productName, and qty are required");
+      }
+      quotationData = {
+        customerName,
+        mobileNumber,
+        email,
+        category,
+        productName,
+        qty,
+      };
     }
 
     let igst = 0;
@@ -29,9 +61,10 @@ exports.createQuotation = async (req, res) => {
       }
     }
 
-    const quotationData = {
-      lead,
+    quotationData = {
+      ...quotationData,
       price,
+      subTotal,
       taxType,
       gstType: taxType === "withoutGst" ? "none" : gstType,
       igstPercentage: igstPer,
@@ -44,13 +77,9 @@ exports.createQuotation = async (req, res) => {
     };
 
     const quotationDetails = await QUOTATION.create(quotationData);
-    const populatedQuotation = await QUOTATION.findById(quotationDetails._id).populate({
-      path: "lead",
-      populate: [
-        { path: "category" },
-        { path: "leadStatus" }
-      ]
-    });
+    const populatedQuotation = await QUOTATION.findById(quotationDetails._id)
+      .populate("category")
+      .populate("lead");
 
     return res.status(201).json({
       status: "Success",
@@ -73,13 +102,8 @@ exports.fetchAllQuotations = async (req, res) => {
 
     const totalQuotations = await QUOTATION.countDocuments();
     const quotationsData = await QUOTATION.find()
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
+      .populate("category")
+      .populate("lead")
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
@@ -106,13 +130,9 @@ exports.fetchAllQuotations = async (req, res) => {
 exports.fetchQuotationById = async (req, res) => {
   try {
     let quotationId = req.params.id;
-    let quotationData = await QUOTATION.findById(quotationId).populate({
-      path: "lead",
-      populate: [
-        { path: "category" },
-        { path: "leadStatus" }
-      ]
-    });
+    let quotationData = await QUOTATION.findById(quotationId)
+      .populate("category")
+      .populate("lead");
     if (!quotationData) {
       throw new Error("Quotation not found");
     }
@@ -175,13 +195,9 @@ exports.quotationUpdate = async (req, res) => {
 
     let updatedQuotation = await QUOTATION.findByIdAndUpdate(quotationId, req.body, {
       new: true,
-    }).populate({
-      path: "lead",
-      populate: [
-        { path: "category" },
-        { path: "leadStatus" }
-      ]
-    });
+    })
+      .populate("category")
+      .populate("lead");
 
     return res.status(200).json({
       status: "Success",
@@ -227,13 +243,10 @@ exports.fetchQuotationsByLead = async (req, res) => {
       throw new Error("Lead not found");
     }
 
-    const quotationsData = await QUOTATION.find({ lead: leadId }).populate({
-      path: "lead",
-      populate: [
-        { path: "category" },
-        { path: "leadStatus" }
-      ]
-    }).sort({ createdAt: -1 });
+    const quotationsData = await QUOTATION.find({ lead: leadId })
+      .populate("category")
+      .populate("lead")
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       status: "Success",

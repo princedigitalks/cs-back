@@ -7,9 +7,36 @@ let QuotationSchema = new Schema(
     lead: {
       type: Schema.Types.ObjectId,
       ref: "Lead",
+    },
+    customerName: {
+      type: String,
+      required: true,
+    },
+    mobileNumber: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+    productName: {
+      type: String,
+      required: true,
+    },
+    qty: {
+      type: Number,
       required: true,
     },
     price: {
+      type: Number,
+      required: true,
+    },
+    subTotal: {
       type: Number,
       required: true,
     },
