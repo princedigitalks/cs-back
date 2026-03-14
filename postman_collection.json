@@ -535,7 +535,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"quotation\": \"QUOTATION_ID_HERE\"\n}"
+              "raw": "{\n  \"quotation\": \"QUOTATION_ID_HERE\",\n  \"deliveryDate\": \"2025-12-31\",\n  \"remarks\": \"Urgent delivery required\",\n  \"orderStatus\": \"ORDER_STATUS_ID_HERE\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/order/create/quotation",

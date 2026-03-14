@@ -3,11 +3,11 @@ const QUOTATION = require("../model/quotation");
 const ORDERSTATUS = require("../model/orderStatus");
 
 const populateOrder = (query) =>
-  query.populate("quotation").populate("category").populate("orderStatuses");
+  query.populate("quotation").populate("category").populate("orderStatus");
 
 exports.createOrderFromQuotation = async (req, res) => {
   try {
-    const { quotation } = req.body;
+    const { quotation, deliveryDate, remarks, orderStatus } = req.body;
 
     if (!quotation) {
       throw new Error("Quotation is required");
@@ -18,7 +18,7 @@ exports.createOrderFromQuotation = async (req, res) => {
       throw new Error("Quotation not found");
     }
 
-    const orderDetails = await ORDER.create({ quotation });
+    const orderDetails = await ORDER.create({ quotation, deliveryDate, remarks, orderStatus });
     const populatedOrder = await populateOrder(ORDER.findById(orderDetails._id));
 
     return res.status(201).json({

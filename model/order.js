@@ -62,12 +62,16 @@ let OrderSchema = new Schema(
     grandTotal: {
       type: String,
     },
-    orderStatuses: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "OrderStatus",
-      },
-    ],
+    deliveryDate: {
+      type: Date,
+    },
+    remarks: {
+      type: String,
+    },
+    orderStatus: {
+      type: Schema.Types.ObjectId,
+      ref: "OrderStatus",
+    },
   },
   { timestamps: true }
 );
