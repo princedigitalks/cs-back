@@ -1,28 +1,14 @@
 const ORDERSTATUS = require("../model/orderStatus");
-const ORDER = require("../model/order");
 
 exports.createOrderStatus = async (req, res) => {
   try {
-    const { orderId, status } = req.body;
-
-    if (!orderId) {
-      throw new Error("Order ID is required");
-    }
+    const { status } = req.body;
 
     if (!status) {
       throw new Error("Status is required");
     }
 
-    const orderExists = await ORDER.findById(orderId);
-    if (!orderExists) {
-      throw new Error("Order not found");
-    }
-
     const orderStatus = await ORDERSTATUS.create({ status });
-
-    await ORDER.findByIdAndUpdate(orderId, {
-      $push: { orderStatuses: orderStatus._id },
-    });
 
     return res.status(201).json({
       status: "Success",

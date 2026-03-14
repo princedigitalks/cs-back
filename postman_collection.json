@@ -975,7 +975,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"orderId\": \"ORDER_ID_HERE\",\n  \"status\": \"Processing\"\n}"
+              "raw": "{\n  \"status\": \"Processing\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/orderStatus/create",
