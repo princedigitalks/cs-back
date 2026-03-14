@@ -75,32 +75,6 @@ exports.fetchOrderStatusById = async (req, res) => {
   }
 };
 
-exports.fetchOrderStatusesByOrder = async (req, res) => {
-  try {
-    const orderId = req.params.orderId;
-
-    const order = await ORDER.findById(orderId).populate({
-      path: "orderStatuses",
-      options: { sort: { createdAt: -1 } }
-    });
-
-    if (!order) {
-      throw new Error("Order not found");
-    }
-
-    return res.status(200).json({
-      status: "Success",
-      message: "Order statuses fetched successfully",
-      data: order.orderStatuses,
-    });
-  } catch (error) {
-    return res.status(404).json({
-      status: "Fail",
-      message: error.message,
-    });
-  }
-};
-
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -139,11 +113,6 @@ exports.deleteOrderStatus = async (req, res) => {
     if (!orderStatus) {
       throw new Error("Order status not found");
     }
-
-    await ORDER.updateMany(
-      { orderStatuses: req.params.id },
-      { $pull: { orderStatuses: req.params.id } }
-    );
 
     await ORDERSTATUS.findByIdAndDelete(req.params.id);
 

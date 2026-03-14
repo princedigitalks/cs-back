@@ -678,19 +678,7 @@
             }
           }
         },
-        {
-          "name": "Get Order Statuses By Order ID",
-          "request": {
-            "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": {
-              "raw": "{{baseUrl}}/orderStatus/order/:orderId",
-              "host": ["{{baseUrl}}"],
-              "path": ["orderStatus", "order", ":orderId"],
-              "variable": [{ "key": "orderId", "value": "" }]
-            }
-          }
-        },
+
         {
           "name": "Update Order Status",
           "request": {
