@@ -38,12 +38,7 @@
           "name": "Create Staff",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fullName\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"mobile\": \"9876543210\",\n  \"password\": \"password123\"\n}"
@@ -59,12 +54,7 @@
           "name": "Login Staff",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
@@ -80,12 +70,7 @@
           "name": "Get Current Staff",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/staff/me",
               "host": ["{{baseUrl}}"],
@@ -97,29 +82,15 @@
           "name": "Get All Staffs",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/staff?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["staff"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "key": "search",
-                  "value": ""
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -128,22 +99,12 @@
           "name": "Get Staff By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/staff/:id",
               "host": ["{{baseUrl}}"],
               "path": ["staff", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -152,14 +113,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -169,12 +124,7 @@
               "raw": "{{baseUrl}}/staff/:id",
               "host": ["{{baseUrl}}"],
               "path": ["staff", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -182,22 +132,12 @@
           "name": "Delete Staff",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/staff/:id",
               "host": ["{{baseUrl}}"],
               "path": ["staff", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -211,14 +151,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -235,29 +169,15 @@
           "name": "Get All Categories",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/category?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["category"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "key": "search",
-                  "value": ""
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -266,22 +186,12 @@
           "name": "Get Category By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/category/:id",
               "host": ["{{baseUrl}}"],
               "path": ["category", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -290,14 +200,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -307,12 +211,7 @@
               "raw": "{{baseUrl}}/category/:id",
               "host": ["{{baseUrl}}"],
               "path": ["category", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -320,22 +219,12 @@
           "name": "Delete Category",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/category/:id",
               "host": ["{{baseUrl}}"],
               "path": ["category", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -349,14 +238,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -373,29 +256,15 @@
           "name": "Get All Lead Status",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/leadStatus?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["leadStatus"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "key": "search",
-                  "value": ""
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -404,22 +273,12 @@
           "name": "Get Lead Status By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/leadStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["leadStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -428,14 +287,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -445,12 +298,7 @@
               "raw": "{{baseUrl}}/leadStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["leadStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -458,22 +306,12 @@
           "name": "Delete Lead Status",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/leadStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["leadStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -487,14 +325,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -511,29 +343,15 @@
           "name": "Get All Leads",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/lead?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["lead"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "key": "search",
-                  "value": ""
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -542,22 +360,12 @@
           "name": "Get Lead By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/lead/:id",
               "host": ["{{baseUrl}}"],
               "path": ["lead", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -566,14 +374,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -583,12 +385,7 @@
               "raw": "{{baseUrl}}/lead/:id",
               "host": ["{{baseUrl}}"],
               "path": ["lead", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -596,22 +393,12 @@
           "name": "Delete Lead",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/lead/:id",
               "host": ["{{baseUrl}}"],
               "path": ["lead", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -625,14 +412,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -650,14 +431,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -674,25 +449,14 @@
           "name": "Get All Quotations",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/quotation?page=1&limit=10",
               "host": ["{{baseUrl}}"],
               "path": ["quotation"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
               ]
             }
           }
@@ -701,22 +465,12 @@
           "name": "Get Quotation By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/quotation/:id",
               "host": ["{{baseUrl}}"],
               "path": ["quotation", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -724,22 +478,12 @@
           "name": "Get Quotations By Lead ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/quotation/lead/:leadId",
               "host": ["{{baseUrl}}"],
               "path": ["quotation", "lead", ":leadId"],
-              "variable": [
-                {
-                  "key": "leadId",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "leadId", "value": "" }]
             }
           }
         },
@@ -748,14 +492,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -765,12 +503,7 @@
               "raw": "{{baseUrl}}/quotation/:id",
               "host": ["{{baseUrl}}"],
               "path": ["quotation", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -778,22 +511,12 @@
           "name": "Delete Quotation",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/quotation/:id",
               "host": ["{{baseUrl}}"],
               "path": ["quotation", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -803,27 +526,40 @@
       "name": "Order",
       "item": [
         {
-          "name": "Create Order",
+          "name": "Create Order (From Quotation)",
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"lead\": \"LEAD_ID_HERE\",\n  \"quotation\": \"QUOTATION_ID_HERE\"\n}"
+              "raw": "{\n  \"quotation\": \"QUOTATION_ID_HERE\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/order/create",
+              "raw": "{{baseUrl}}/order/create/quotation",
               "host": ["{{baseUrl}}"],
-              "path": ["order", "create"]
+              "path": ["order", "create", "quotation"]
+            }
+          }
+        },
+        {
+          "name": "Create Order (Manually)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"john@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Business Cards\",\n  \"qty\": 500,\n  \"price\": 5000,\n  \"subTotal\": 5000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"igst\": 900,\n  \"grandTotal\": \"5900\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/order/create/manual",
+              "host": ["{{baseUrl}}"],
+              "path": ["order", "create", "manual"]
             }
           }
         },
@@ -831,25 +567,14 @@
           "name": "Get All Orders",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/order?page=1&limit=10",
               "host": ["{{baseUrl}}"],
               "path": ["order"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
               ]
             }
           }
@@ -858,45 +583,12 @@
           "name": "Get Order By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/order/:id",
               "host": ["{{baseUrl}}"],
               "path": ["order", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Orders By Lead ID",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/order/lead/:leadId",
-              "host": ["{{baseUrl}}"],
-              "path": ["order", "lead", ":leadId"],
-              "variable": [
-                {
-                  "key": "leadId",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -905,29 +597,18 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerName\": \"Updated Name\",\n  \"qty\": 200\n}"
+              "raw": "{\n  \"customerName\": \"Updated Name\",\n  \"qty\": 200,\n  \"price\": 3000\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/order/:id",
               "host": ["{{baseUrl}}"],
               "path": ["order", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -935,22 +616,12 @@
           "name": "Delete Order",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/order/:id",
               "host": ["{{baseUrl}}"],
               "path": ["order", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }
@@ -964,14 +635,8 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -988,25 +653,14 @@
           "name": "Get All Order Statuses",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/orderStatus?page=1&limit=10",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus"],
               "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
               ]
             }
           }
@@ -1015,22 +669,12 @@
           "name": "Get Order Status By ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/orderStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -1038,22 +682,12 @@
           "name": "Get Order Statuses By Order ID",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/orderStatus/order/:orderId",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus", "order", ":orderId"],
-              "variable": [
-                {
-                  "key": "orderId",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "orderId", "value": "" }]
             }
           }
         },
@@ -1062,14 +696,8 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -1079,12 +707,7 @@
               "raw": "{{baseUrl}}/orderStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         },
@@ -1092,22 +715,12 @@
           "name": "Delete Order Status",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{baseUrl}}/orderStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "variable": [{ "key": "id", "value": "" }]
             }
           }
         }

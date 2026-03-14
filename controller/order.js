@@ -1,43 +1,60 @@
 const ORDER = require("../model/order");
-const LEAD = require("../model/lead");
 const QUOTATION = require("../model/quotation");
+const ORDERSTATUS = require("../model/orderStatus");
 
-exports.createOrder = async (req, res) => {
+const populateOrder = (query) =>
+  query.populate("quotation").populate("category").populate("orderStatuses");
+
+exports.createOrderFromQuotation = async (req, res) => {
   try {
-    const { lead, quotation, ...otherFields } = req.body;
+    const { quotation } = req.body;
 
-    if (!lead) {
-      throw new Error("Lead is required");
+    if (!quotation) {
+      throw new Error("Quotation is required");
     }
 
-    const leadExists = await LEAD.findById(lead);
-    if (!leadExists) {
-      throw new Error("Lead not found");
+    const quotationExists = await QUOTATION.findById(quotation);
+    if (!quotationExists) {
+      throw new Error("Quotation not found");
     }
 
-    let orderData = { lead, ...otherFields };
+    const orderDetails = await ORDER.create({ quotation });
+    const populatedOrder = await populateOrder(ORDER.findById(orderDetails._id));
 
-    if (quotation) {
-      const quotationExists = await QUOTATION.findById(quotation);
-      if (!quotationExists) {
-        throw new Error("Quotation not found");
-      }
-      orderData.quotation = quotation;
+    return res.status(201).json({
+      status: "Success",
+      message: "Order created successfully",
+      data: populatedOrder,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.createOrderManually = async (req, res) => {
+  try {
+    const {
+      customerName, mobileNumber, email, category,
+      productName, qty, price, subTotal, taxType,
+      gstType, igstPercentage, cgstPercentage, sgstPercentage,
+      igst, cgst, sgst, grandTotal,
+    } = req.body;
+
+    if (!customerName || !mobileNumber || !productName || !qty || !price || !grandTotal) {
+      throw new Error("customerName, mobileNumber, productName, qty, price and grandTotal are required");
     }
 
-    const orderDetails = await ORDER.create(orderData);
+    const orderDetails = await ORDER.create({
+      customerName, mobileNumber, email, category,
+      productName, qty, price, subTotal, taxType,
+      gstType, igstPercentage, cgstPercentage, sgstPercentage,
+      igst, cgst, sgst, grandTotal,
+    });
 
-    const populatedOrder = await ORDER.findById(orderDetails._id)
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
-      .populate("quotation")
-      .populate("category")
-      .populate("orderStatuses");
+    const populatedOrder = await populateOrder(ORDER.findById(orderDetails._id));
 
     return res.status(201).json({
       status: "Success",
@@ -59,20 +76,9 @@ exports.fetchAllOrders = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const totalOrders = await ORDER.countDocuments();
-    const ordersData = await ORDER.find()
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
-      .populate("quotation")
-      .populate("category")
-      .populate("orderStatuses")
-      .skip(skip)
-      .limit(limit)
-      .sort({ createdAt: -1 });
+    const ordersData = await populateOrder(
+      ORDER.find().skip(skip).limit(limit).sort({ createdAt: -1 })
+    );
 
     return res.status(200).json({
       status: "Success",
@@ -95,22 +101,12 @@ exports.fetchAllOrders = async (req, res) => {
 
 exports.fetchOrderById = async (req, res) => {
   try {
-    let orderId = req.params.id;
-    let orderData = await ORDER.findById(orderId)
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
-      .populate("quotation")
-      .populate("category")
-      .populate("orderStatuses");
+    const orderData = await populateOrder(ORDER.findById(req.params.id));
 
     if (!orderData) {
       throw new Error("Order not found");
     }
+
     return res.status(200).json({
       status: "Success",
       message: "Order fetched successfully",
@@ -126,26 +122,14 @@ exports.fetchOrderById = async (req, res) => {
 
 exports.orderUpdate = async (req, res) => {
   try {
-    let orderId = req.params.id;
-    let oldOrder = await ORDER.findById(orderId);
-
+    const oldOrder = await ORDER.findById(req.params.id);
     if (!oldOrder) {
       throw new Error("Order not found");
     }
 
-    let updatedOrder = await ORDER.findByIdAndUpdate(orderId, req.body, {
-      new: true,
-    })
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
-      .populate("quotation")
-      .populate("category")
-      .populate("orderStatuses");
+    const updatedOrder = await populateOrder(
+      ORDER.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    );
 
     return res.status(200).json({
       status: "Success",
@@ -162,58 +146,20 @@ exports.orderUpdate = async (req, res) => {
 
 exports.orderDelete = async (req, res) => {
   try {
-    let orderId = req.params.id;
-    let oldOrder = await ORDER.findById(orderId);
-
+    const oldOrder = await ORDER.findById(req.params.id);
     if (!oldOrder) {
       throw new Error("Order not found");
     }
 
-    // Delete all associated order statuses
     if (oldOrder.orderStatuses && oldOrder.orderStatuses.length > 0) {
       await ORDERSTATUS.deleteMany({ _id: { $in: oldOrder.orderStatuses } });
     }
 
-    await ORDER.findByIdAndDelete(orderId);
+    await ORDER.findByIdAndDelete(req.params.id);
 
     return res.status(200).json({
       status: "Success",
       message: "Order deleted successfully",
-    });
-  } catch (error) {
-    return res.status(404).json({
-      status: "Fail",
-      message: error.message,
-    });
-  }
-};
-
-exports.fetchOrdersByLead = async (req, res) => {
-  try {
-    let leadId = req.params.leadId;
-    
-    const leadExists = await LEAD.findById(leadId);
-    if (!leadExists) {
-      throw new Error("Lead not found");
-    }
-
-    const ordersData = await ORDER.find({ lead: leadId })
-      .populate({
-        path: "lead",
-        populate: [
-          { path: "category" },
-          { path: "leadStatus" }
-        ]
-      })
-      .populate("quotation")
-      .populate("category")
-      .populate("orderStatuses")
-      .sort({ createdAt: -1 });
-
-    return res.status(200).json({
-      status: "Success",
-      message: "Orders fetched successfully",
-      data: ordersData,
     });
   } catch (error) {
     return res.status(404).json({
