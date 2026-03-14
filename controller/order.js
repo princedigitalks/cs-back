@@ -18,7 +18,29 @@ exports.createOrderFromQuotation = async (req, res) => {
       throw new Error("Quotation not found");
     }
 
-    const orderDetails = await ORDER.create({ quotation, deliveryDate, remarks, orderStatus });
+    const orderDetails = await ORDER.create({
+      quotation,
+      customerName: quotationExists.customerName,
+      mobileNumber: quotationExists.mobileNumber,
+      email: quotationExists.email,
+      category: quotationExists.category,
+      productName: quotationExists.productName,
+      qty: quotationExists.qty,
+      price: quotationExists.price,
+      subTotal: quotationExists.subTotal,
+      taxType: quotationExists.taxType,
+      gstType: quotationExists.gstType,
+      igstPercentage: quotationExists.igstPercentage,
+      cgstPercentage: quotationExists.cgstPercentage,
+      sgstPercentage: quotationExists.sgstPercentage,
+      igst: quotationExists.igst,
+      cgst: quotationExists.cgst,
+      sgst: quotationExists.sgst,
+      grandTotal: quotationExists.grandTotal,
+      deliveryDate,
+      remarks,
+      orderStatus,
+    });
     const populatedOrder = await populateOrder(ORDER.findById(orderDetails._id));
 
     return res.status(201).json({
