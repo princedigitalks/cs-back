@@ -99,9 +99,20 @@ exports.fetchAllQuotations = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
+    const { search } = req.query;
 
-    const totalQuotations = await QUOTATION.countDocuments();
-    const quotationsData = await QUOTATION.find()
+    const filter = search
+      ? {
+          $or: [
+            { customerName: { $regex: search, $options: "i" } },
+            { mobileNumber: { $regex: search, $options: "i" } },
+            { productName: { $regex: search, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const totalQuotations = await QUOTATION.countDocuments(filter);
+    const quotationsData = await QUOTATION.find(filter)
       .populate("category")
       .populate("lead")
       .skip(skip)

@@ -1,6 +1,7 @@
 const ORDER = require("../model/order");
 const QUOTATION = require("../model/quotation");
 const ORDERSTATUS = require("../model/orderStatus");
+const CUSTOMER = require("../model/customer");
 
 const populateOrder = (query) =>
   query.populate("quotation").populate("category").populate("orderStatus");
@@ -62,7 +63,7 @@ exports.createOrderManually = async (req, res) => {
       customerName, mobileNumber, email, category,
       productName, qty, price, subTotal, taxType,
       gstType, igstPercentage, cgstPercentage, sgstPercentage,
-      igst, cgst, sgst, grandTotal,
+      igst, cgst, sgst, grandTotal, deliveryDate, remarks, orderStatus,
     } = req.body;
 
     if (!customerName || !mobileNumber || !productName || !qty || !price || !grandTotal) {
@@ -73,7 +74,7 @@ exports.createOrderManually = async (req, res) => {
       customerName, mobileNumber, email, category,
       productName, qty, price, subTotal, taxType,
       gstType, igstPercentage, cgstPercentage, sgstPercentage,
-      igst, cgst, sgst, grandTotal,
+      igst, cgst, sgst, grandTotal, deliveryDate, remarks, orderStatus,
     });
 
     const populatedOrder = await populateOrder(ORDER.findById(orderDetails._id));
@@ -96,10 +97,21 @@ exports.fetchAllOrders = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
+    const { search } = req.query;
 
-    const totalOrders = await ORDER.countDocuments();
+    const filter = search
+      ? {
+          $or: [
+            { customerName: { $regex: search, $options: "i" } },
+            { mobileNumber: { $regex: search, $options: "i" } },
+            { productName: { $regex: search, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const totalOrders = await ORDER.countDocuments(filter);
     const ordersData = await populateOrder(
-      ORDER.find().skip(skip).limit(limit).sort({ createdAt: -1 })
+      ORDER.find(filter).skip(skip).limit(limit).sort({ createdAt: -1 })
     );
 
     return res.status(200).json({
@@ -152,6 +164,22 @@ exports.orderUpdate = async (req, res) => {
     const updatedOrder = await populateOrder(
       ORDER.findByIdAndUpdate(req.params.id, req.body, { new: true })
     );
+
+    // Agar orderStatus completed hai to customer me data add karo
+    if (req.body.orderStatus) {
+      const statusDoc = await ORDERSTATUS.findById(req.body.orderStatus);
+      if (statusDoc && statusDoc.status.toLowerCase() === "completed") {
+        await CUSTOMER.findOneAndUpdate(
+          { mobileNumber: oldOrder.mobileNumber },
+          {
+            customerName: oldOrder.customerName,
+            email: oldOrder.email,
+            $addToSet: { orders: oldOrder._id },
+          },
+          { upsert: true, new: true }
+        );
+      }
+    }
 
     return res.status(200).json({
       status: "Success",
