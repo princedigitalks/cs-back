@@ -15,6 +15,23 @@
   ],
   "item": [
     {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard"]
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "Health",
       "item": [
         {
@@ -451,12 +468,13 @@
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "{{baseUrl}}/quotation?page=1&limit=10",
+              "raw": "{{baseUrl}}/quotation?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["quotation"],
               "query": [
                 { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -554,7 +572,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"john@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Business Cards\",\n  \"qty\": 500,\n  \"price\": 5000,\n  \"subTotal\": 5000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"igst\": 900,\n  \"grandTotal\": \"5900\"\n}"
+              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"mobileNumber\": \"9876543210\",\n  \"email\": \"john@example.com\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"productName\": \"Business Cards\",\n  \"qty\": 500,\n  \"price\": 5000,\n  \"subTotal\": 5000,\n  \"taxType\": \"withGst\",\n  \"gstType\": \"igst\",\n  \"igstPercentage\": 18,\n  \"igst\": 900,\n  \"grandTotal\": \"5900\",\n  \"deliveryDate\": \"2025-12-31\",\n  \"remarks\": \"Urgent delivery required\",\n  \"orderStatus\": \"ORDER_STATUS_ID_HERE\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/order/create/manual",
@@ -569,12 +587,13 @@
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "{{baseUrl}}/order?page=1&limit=10",
+              "raw": "{{baseUrl}}/order?page=1&limit=10&search=",
               "host": ["{{baseUrl}}"],
               "path": ["order"],
               "query": [
                 { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
               ]
             }
           }
@@ -708,6 +727,74 @@
               "raw": "{{baseUrl}}/orderStatus/:id",
               "host": ["{{baseUrl}}"],
               "path": ["orderStatus", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/customer?page=1&limit=10&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["customer"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Customer By ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/customer/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["customer", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Updated Name\",\n  \"email\": \"updated@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customer/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["customer", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/customer/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["customer", ":id"],
               "variable": [{ "key": "id", "value": "" }]
             }
           }
