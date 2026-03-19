@@ -11,5 +11,7 @@ router.use("/quotation", require("./quotation"));
 router.use("/order", require("./order"));
 router.use("/orderStatus", require("./orderStatus"));
 router.use("/customer", require("./customer"));
+router.use("/vendorLabel", require("./vendorLabel"));
+router.use("/vendor", require("./vendor"));
 
 module.exports = router;
