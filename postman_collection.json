@@ -800,6 +800,180 @@
           }
         }
       ]
+    },
+    {
+      "name": "Vendor Label",
+      "item": [
+        {
+          "name": "Create Vendor Label",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"Service Provider\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendorLabel/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendorLabel", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Vendor Labels",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendorLabel?page=1&limit=10&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendorLabel"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Vendor Label By ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendorLabel/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendorLabel", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update Vendor Label",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"Updated Label\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendorLabel/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendorLabel", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Vendor Label",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendorLabel/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendorLabel", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vendor",
+      "item": [
+        {
+          "name": "Create Vendor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Vendor Name\",\n  \"mobileNo\": \"9876543210\",\n  \"labelId\": \"VENDOR_LABEL_ID_HERE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendor/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendor", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Vendors",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendor?page=1&limit=10&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendor"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Vendor By ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendor/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendor", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update Vendor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Vendor\",\n  \"mobileNo\": \"9998887770\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendor/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendor", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Vendor",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/vendor/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["vendor", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        }
+      ]
     }
   ]
 }
